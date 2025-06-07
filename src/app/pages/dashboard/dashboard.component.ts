@@ -17,9 +17,7 @@ export class DashboardComponent implements OnInit {
   uvRiskLevel: string | null = null;
   menuOpen = false;
 
-  constructor(private http: HttpClient) {
-    this.fetchUVIndex();
-  }
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.loadFromLocalStorage();
@@ -42,30 +40,6 @@ export class DashboardComponent implements OnInit {
     if (analyzeSection && downloadSection) {
       analyzeSection.insertAdjacentElement('afterend', downloadSection);
     }
-  }
-
-  fetchUVIndex() {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        this.http
-          .get<any>(
-            `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&uv_index=true`
-          )
-          .subscribe(
-            (data) => {
-              this.uvIndex = data.current_weather.uv_index;
-              this.uvRiskLevel = this.uvIndex !== null ? this.getUVRiskLevel(this.uvIndex) : 'Indisponível';
-            },
-            (error) => {
-              this.uvRiskLevel = 'Erro ao obter dados';
-            }
-          );
-      },
-      (error) => {
-        this.uvRiskLevel = 'Erro ao obter localização';
-      }
-    );
   }
 
   getUVRiskLevel(uvIndex: number): string {
