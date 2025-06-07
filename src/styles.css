@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+/* Adicionando estilos para animação da sidebar */
+.fixed {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 16rem; /* 64px */
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+}
+.fixed.translate-x-0 {
+  transform: translateX(0);
+}
+.fixed.translate-x-full {
+  transform: translateX(100%);
+}
+.z-50 {
+  z-index: 50;
+}

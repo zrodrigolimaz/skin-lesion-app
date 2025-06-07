@@ -1,0 +1,69 @@
+.upload-container {
+  width: 100%;
+}
+
+.upload-area {
+  border-color: #d1d5db;
+  background-color: #f9fafb;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-area::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(59, 130, 246, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.upload-area:hover::before {
+  left: 100%;
+}
+
+.upload-area.border-blue-400 {
+  border-color: #60a5fa;
+  background-color: #dbeafe;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+.gradient-border {
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+  padding: 2px;
+  border-radius: 12px;
+}
+
+.gradient-border > div {
+  background: white;
+  border-radius: 10px;
+}
