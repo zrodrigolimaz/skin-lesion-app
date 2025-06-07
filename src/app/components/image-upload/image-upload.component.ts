@@ -71,7 +71,7 @@ export class ImageUploadComponent {
     const formData = new FormData();
     formData.append('file', this.selectedFile);
 
-    this.http.post<any>('http://localhost:8000/predict', formData).subscribe({
+    this.http.post<any>('https://skin-lesion-api-d30g.onrender.com/predict', formData).subscribe({
       next: (res) => {
         this.result = res;
         this.isUploading = false;
