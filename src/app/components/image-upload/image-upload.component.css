@@ -1,69 +1,172 @@
-.upload-container {
+.upload-wrap {
   width: 100%;
 }
 
-.upload-area {
-  border-color: #d1d5db;
-  background-color: #f9fafb;
+/* ── Dropzone ── */
+.dropzone {
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 3rem 2rem;
+  text-align: center;
   cursor: pointer;
-  position: relative;
+  transition: border-color 0.2s, background 0.2s;
+}
+.dropzone:hover,
+.dropzone.active {
+  border-color: #22d3ee;
+  background: rgba(34, 211, 238, 0.03);
+}
+.dropzone-icon {
+  color: #555;
+  margin-bottom: 1rem;
+}
+.dropzone-icon svg {
+  margin: 0 auto;
+}
+.dropzone-text {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin: 0 0 0.3rem;
+}
+.dropzone-hint {
+  font-size: 0.75rem;
+  color: #555;
+  margin: 0;
+}
+
+/* ── File Preview ── */
+.file-preview {
+  margin-top: 1rem;
+  padding: 1rem 1.2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.file-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+.file-name {
+  font-size: 0.85rem;
+  color: #e5e5e5;
+  font-weight: 500;
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
+}
+.file-size {
+  font-size: 0.7rem;
+  color: #666;
+}
+.file-actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+.btn-remove {
+  font-size: 0.75rem;
+  color: #888;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.btn-remove:hover {
+  color: #f87171;
+  border-color: rgba(248, 113, 113, 0.3);
+}
+.btn-analyze {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #0a0a0a;
+  background: #22d3ee;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-analyze:hover { background: #67e8f9; }
+.btn-analyze:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.loading {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.spinner {
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
-.upload-area::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
+/* ── Result ── */
+.result {
+  margin-top: 1rem;
+  padding: 1.2rem;
+  background: rgba(74, 222, 128, 0.05);
+  border: 1px solid rgba(74, 222, 128, 0.15);
+  border-radius: 8px;
+}
+.result.malignant {
+  background: rgba(248, 113, 113, 0.05);
+  border-color: rgba(248, 113, 113, 0.15);
+}
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+.result-label {
+  font-size: 0.75rem;
+  color: #888;
+}
+.result-class {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #4ade80;
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
+}
+.result.malignant .result-class {
+  color: #f87171;
+}
+.result-bar-wrap {
   width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 0.8rem;
+}
+.result-bar {
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(59, 130, 246, 0.1),
-    transparent
-  );
-  transition: left 0.5s ease;
+  background: #4ade80;
+  border-radius: 2px;
+  transition: width 0.6s ease;
 }
-
-.upload-area:hover::before {
-  left: 100%;
+.result.malignant .result-bar {
+  background: #f87171;
 }
-
-.upload-area.border-blue-400 {
-  border-color: #60a5fa;
-  background-color: #dbeafe;
+.result-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: #666;
 }
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.8;
-  }
-}
-
-.animate-pulse {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
-
-button:active {
-  transform: translateY(0);
-}
-
-.gradient-border {
-  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
-  padding: 2px;
-  border-radius: 12px;
-}
-
-.gradient-border > div {
-  background: white;
-  border-radius: 10px;
+.result-pct {
+  font-weight: 600;
+  color: #aaa;
 }
